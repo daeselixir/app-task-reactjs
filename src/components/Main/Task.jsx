@@ -1,159 +1,78 @@
-import styled from "styled-components";
-
-const WrapperTask = styled.div`
-  /* border: 1px solid red; */
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-
-  gap: 1rem;
-  padding: 0.5rem;
-
-  .fecha {
-    /* border: 1px solid red; */
-
-    font-size: 14px;
-    text-align: center;
-
-    p {
-      color: #908c8c;
-      font-weight: 100;
-      margin: inherit;
-    }
-
-    span {
-      color: #414246;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-
-  .tarea {
-    /* border: 1px solid green; */
-
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    background: white;
-    border-left: 3px solid #5862f7;
-    padding: 8px;
-    /* max-width: 100%; */
-    max-height: 4rem;
-
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* gap: 1rem; */
-
-    p {
-      color: #414246;
-      font-size: 16px;
-      font-weight: bold;
-      margin: 0;
-      /* margin-bottom: 2px; */
-    }
-
-    i {
-      margin: 0;
-      color: #d3d3dd;
-    }
-  }
-
-  .button {
-    /* border: 1px solid red; */
-    height: 4rem;
-    /* max-width: 30%; */
-
-    display: flex;
-    gap: 0.5rem;
-
-    .btn {
-      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      background: white;
-      max-height: 100%;
-    }
-  }
-
-  @media only screen and (max-width: 500px) {
-    /* border: 1px solid green; */
-    padding: 0.4rem;
-    gap: 0.4rem;
-
-    flex-direction: column;
-    align-items: stretch;
-
-    .tarea {
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .button {
-      justify-content: center;
-    }
-
-    .fecha p {
-      /* margin-bottom: 1px; */
-    }
-  }
-`;
+import { useEffect, useState } from "react";
+import { TaskStyle } from "../../assets/wrappers/TaskStyle";
+import { data } from "../../../data";
 
 const Task = () => {
+  const [listTareas, setListTareas] = useState(data);
+  // console.log(listTareas);
+
+  useEffect(() => {
+    setListTareas(data);
+  }, []);
+
   return (
-    <WrapperTask>
-      {/*1 fecha creacion */}
-      <div className="fecha">
-        <p>Friday</p>
-        <span>20</span>
-      </div>
-      {/*2 tareas */}
-      <div className="tarea">
-        <p>Nombre de la tarea</p>
-        <i>12:00 - 13:00pm</i>
-      </div>
-      {/*3 botones */}
-      <div className="button">
-        {/* btn Ok ask */}
+    <>
+      {listTareas.map((tarea) => {
+        return (
+          <TaskStyle key={tarea.id}>
+            {/*1 fecha creacion */}
+            <div className="fecha">
+              <p>{tarea.day} </p>
+              <span>{tarea.date} </span>
+            </div>
+            {/*2 tareas */}
+            <div className="tarea">
+              <p>{tarea.name} </p>
+              <i>{tarea.hour} </i>
+            </div>
+            {/*3 botones */}
+            <div className="button">
+              {/* btn Ok ask */}
 
-        <button className="btn">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M22 2L8 22L2 14.5" stroke="#918C8C" strokeWidth="3" />
-          </svg>
-        </button>
+              <button className="btn">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22 2L8 22L2 14.5"
+                    stroke="#918C8C"
+                    strokeWidth="3"
+                  />
+                </svg>
+              </button>
 
-        {/* btn delete */}
-        <button className="btn">
-          <svg
-            width="23"
-            height="24"
-            viewBox="0 0 23 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3 5L4.18056 21.3636C4.23663 22.3091 5.03056 23 6.06944 23H16.9306C17.9736 23 18.7527 22.3091 18.8194 21.3636L20 5"
-              stroke="#CB2222"
-              strokeWidth="2"
-            />
-            <path d="M1 5H22H1Z" fill="black" />
-            <path d="M1 5H22" />
-            <path
-              d="M7.5 4.27273V2.22728C7.49942 2.06598 7.53783 1.90618 7.613 1.75706C7.68818 1.60795 7.79865 1.47247 7.93805 1.35841C8.07746 1.24435 8.24304 1.15397 8.42529 1.09246C8.60754 1.03095 8.80286 0.999533 9 1.00001H14C14.1971 0.999533 14.3925 1.03095 14.5747 1.09246C14.757 1.15397 14.9225 1.24435 15.0619 1.35841C15.2014 1.47247 15.3118 1.60795 15.387 1.75706C15.4622 1.90618 15.5006 2.06598 15.5 2.22728V4.27273M11.5 7.54546V19M7 7.54546L7.5 19M16 7.54546L15.5 19"
-              stroke="#CB2222"
-              strokeWidth="2"
-            />
-          </svg>
-        </button>
-      </div>
-    </WrapperTask>
+              {/* btn delete */}
+              <button className="btn">
+                <svg
+                  width="23"
+                  height="24"
+                  viewBox="0 0 23 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 5L4.18056 21.3636C4.23663 22.3091 5.03056 23 6.06944 23H16.9306C17.9736 23 18.7527 22.3091 18.8194 21.3636L20 5"
+                    stroke="#CB2222"
+                    strokeWidth="2"
+                  />
+                  <path d="M1 5H22H1Z" fill="black" />
+                  <path d="M1 5H22" />
+                  <path
+                    d="M7.5 4.27273V2.22728C7.49942 2.06598 7.53783 1.90618 7.613 1.75706C7.68818 1.60795 7.79865 1.47247 7.93805 1.35841C8.07746 1.24435 8.24304 1.15397 8.42529 1.09246C8.60754 1.03095 8.80286 0.999533 9 1.00001H14C14.1971 0.999533 14.3925 1.03095 14.5747 1.09246C14.757 1.15397 14.9225 1.24435 15.0619 1.35841C15.2014 1.47247 15.3118 1.60795 15.387 1.75706C15.4622 1.90618 15.5006 2.06598 15.5 2.22728V4.27273M11.5 7.54546V19M7 7.54546L7.5 19M16 7.54546L15.5 19"
+                    stroke="#CB2222"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </TaskStyle>
+        );
+      })}
+    </>
   );
 };
 

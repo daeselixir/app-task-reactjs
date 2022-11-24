@@ -1,47 +1,28 @@
-import styled from "styled-components";
+import { useState } from "react";
+import {FormControl,InputStyle} from '../../assets/wrappers/FormControl'
 
-const FormControl = styled.div`
-  /* border: 1px solid green; */
-  width: 80%;
-  height: 3rem;
-  /* padding: 1rem; */
-/* margin: 1rem; */
+const Input = ({ onNewTask }) => {
+  const [search, setSearch] = useState("");
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* gap: 1rem; */
+  const handleSubmit = (e) => {
+    console.log(e.event.target);
+    onNewTask(search.trim());
+    setSearch("");
+  };
 
-  @media only screen and (max-width: 500px) {
-    width: 100%;
-    /* padding: 1rem; */
-  }
-`;
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
-const InputStyle = styled.input`
-  border: 2px solid white;
-  border-radius: 5px;
-  padding: 0.7rem;
-  transition: all 0.3s;
-  width: 100%;
-
-  &:focus {
-    border-bottom: 2px solid #5862f7;
-    outline: none;
-  }
-
-  &::placeholder {
-    font-size: 14px;
-    font-weight: lighter;
-    color: #b8b9bb;
-  }
-
-`;
-
-const Input = () => {
   return (
-    <FormControl>
-      <InputStyle placeholder="Add Task..." />
+    <FormControl onSubmit={handleSubmit}>
+      <InputStyle
+        type="text"
+        placeholder="Add Task..."
+        onChange={handleChange}
+        value={search}
+        name="search"
+      />
     </FormControl>
   );
 };
