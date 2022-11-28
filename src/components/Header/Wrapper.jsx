@@ -2,14 +2,14 @@ import Input from "./Input";
 import Button from "./Button";
 import { Header } from "../../assets/wrappers/Header";
 
-const Wrapper = () => {
+const Wrapper = ({ value, handleChange, handleSubmit }) => {
   return (
-    <Header>
+    <Header onSubmit={handleSubmit}>
       <div className="form-control inp">
-        <Input />
+        <Input addInput={value} handleChange={handleChange} />
       </div>
       <div className="form-control btns">
-        <Button />
+        <Button type='submit' />
       </div>
     </Header>
   );

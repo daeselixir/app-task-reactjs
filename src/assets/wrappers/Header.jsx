@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.div`
+export const Header = styled.form`
   /* border: 1px solid red; */
 
   padding: 15px;
