@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TaskStyle } from "../../assets/wrappers/TaskStyle";
 
-const Task = ({ tareas }) => {
+const Task = ({ tareas, removeTask }) => {
   return (
     <>
       {tareas.map((tarea) => {
@@ -21,7 +21,11 @@ const Task = ({ tareas }) => {
             <div className="button">
               {/* btn Ok ask */}
 
-              <button className="btn">
+              <button
+                type="submit"
+                className="btn"
+                // onSubmit={removeTask(tarea.id)}
+              >
                 <svg
                   width="24"
                   height="24"
@@ -38,7 +42,7 @@ const Task = ({ tareas }) => {
               </button>
 
               {/* btn delete */}
-              <button className="btn">
+              <button className="btn" onClick={() => removeTask(tarea.id)}>
                 <svg
                   width="23"
                   height="24"

@@ -4,9 +4,7 @@ import Container from "./assets/wrappers/Container";
 import Header from "./components/Header/Wrapper";
 import Main from "./components/Main/Wrapper";
 import Pagination from "./components/Footer/Pagination";
-
-let max = 18989;
-const randomID = Math.floor(Math.random() * max);
+import { v4 as uuidv4 } from "uuid";
 
 const capitalize = (palabra) => {
   return palabra.charAt(0).toUpperCase() + palabra.slice(1);
@@ -33,10 +31,14 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (inputSearch === "") {
+      return;
+    }
+
     setListTareas([
       ...listTareas,
       {
-        id: randomID,
+        id: uuidv4(),
         input: inputSearch,
         mes: mes,
         day: day,
@@ -45,6 +47,13 @@ const App = () => {
     ]);
 
     setInputSearch("");
+  };
+
+  const removeTask = (task) => {
+    // console.log(task);
+    const filtred = listTareas.filter((tarea) => tarea.id !== task);
+
+    setListTareas([...filtred]);
   };
 
   return (
@@ -57,7 +66,7 @@ const App = () => {
           handleSubmit={handleSubmit}
         />
         {/* {!==} */}
-        <Main tareas={listTareas} />
+        <Main tareas={listTareas} removeTask={removeTask} />
         {/* <Pagination /> */}
       </Container>
     </AppDesign>
