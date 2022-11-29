@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
-import { TaskStyle } from "../../assets/wrappers/TaskStyle";
-
-const Task = ({ tareas }) => {
-  return (
-    <>
-      {tareas.map((tarea) => {
+{tareas.map((tarea) => {
         return (
           <TaskStyle key={tarea.id}>
             {/*1 fecha creacion */}
             <div className="fecha">
-              <p>{tarea.mes} </p>
-              <span>{tarea.day} </span>
+              <p>{tarea.day} </p>
+              <span>{tarea.date} </span>
             </div>
             {/*2 tareas */}
             <div className="tarea">
-              <p>{tarea.input} </p>
-              <i>{tarea.fecha} </i>
+              <p>{tarea.name} </p>
+              <i>{tarea.hour} </i>
             </div>
             {/*3 botones */}
             <div className="button">
@@ -38,7 +32,7 @@ const Task = ({ tareas }) => {
               </button>
 
               {/* btn delete */}
-              <button className="btn">
+              <button className="btn" >
                 <svg
                   width="23"
                   height="24"
@@ -64,8 +58,3 @@ const Task = ({ tareas }) => {
           </TaskStyle>
         );
       })}
-    </>
-  );
-};
-
-export default Task;

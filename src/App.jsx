@@ -5,6 +5,9 @@ import Header from "./components/Header/Wrapper";
 import Main from "./components/Main/Wrapper";
 import Pagination from "./components/Footer/Pagination";
 
+let max = 18989;
+const randomID = Math.floor(Math.random() * max);
+
 const capitalize = (palabra) => {
   return palabra.charAt(0).toUpperCase() + palabra.slice(1);
 };
@@ -16,7 +19,8 @@ const newD = new Date().toLocaleDateString("es", {
   day: "numeric",
 });
 
-const day = new Date().toLocaleDateString("es", { month: "short" });
+const mes = new Date().toLocaleDateString("es", { month: "short" });
+const day = new Date().toLocaleDateString("es", { day: "numeric" });
 
 const App = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -32,9 +36,11 @@ const App = () => {
     setListTareas([
       ...listTareas,
       {
+        id: randomID,
         input: inputSearch,
-        mes: day,
-        fecha : capitalize(newD)
+        mes: mes,
+        day: day,
+        fecha: capitalize(newD),
       },
     ]);
 

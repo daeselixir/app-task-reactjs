@@ -2,17 +2,11 @@ import { useState, useEffect } from "react";
 import Task from "./Task";
 import { Main } from "../../assets/wrappers/Main";
 
-const Wrapper = ({ value}) => {
-  // const [listTask, setListTask] = useState(tarea);
-
-  // useEffect(() => {
-  //   setListTask(listTask);
-  // }, [tarea]);
-
+const Wrapper = ({ tareas }) => {
 
   return (
     <Main>
-      <Task />
+      <Task tareas={tareas} />
     </Main>
   );
 };
