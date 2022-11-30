@@ -16,7 +16,7 @@ export const FormControl = styled.div`
 `;
 
 export const InputStyle = styled.input`
-  border: 2px solid white;
+  border: 2px solid #EEF1F6;
   border-radius: 5px;
   padding: 0.7rem;
   transition: all 0.3s;
@@ -24,14 +24,41 @@ export const InputStyle = styled.input`
   color: #707070;
 
   &:focus {
+    border-top:2px solid #EEF1F6 ;
+    border-left:2px solid #EEF1F6 ;
+    border-right:2px solid #EEF1F6 ;
     border-bottom: 2px solid #5862f7;
     outline: none;
     color: #707070;
   }
 
+  /* &:active{
+    border-top:2px solid #EEF1F6 ;
+    border-left:2px solid #EEF1F6 ;
+    border-right:2px solid #EEF1F6 ;
+  }
+
+  &:hover{
+    border-top:2px solid #EEF1F6 ;
+    border-left:2px solid #EEF1F6 ;
+    border-right:2px solid #EEF1F6 ;
+  }
+
+  &::selection{
+
+    border-top:2px solid #EEF1F6 ;
+    border-left:2px solid #EEF1F6 ;
+    border-right:2px solid #EEF1F6 ;
+
+  } */
+
+
+
   &::placeholder {
     font-size: 14px;
     font-weight: lighter;
     color: #b8b9bb;
+    border: none;
   }
 `;
+
