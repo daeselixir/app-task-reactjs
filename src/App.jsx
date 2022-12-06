@@ -5,7 +5,6 @@ import Header from "./components/Header/Wrapper";
 import Main from "./components/Main/Wrapper";
 import Pagination from "./components/Footer/Pagination";
 import { v4 as uuidv4 } from "uuid";
-import { set } from "date-fns";
 
 const capitalize = (palabra) => {
   return palabra.charAt(0).toUpperCase() + palabra.slice(1);
@@ -26,6 +25,14 @@ const App = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [listTareas, setListTareas] = useState([]);
   const [estado, setEstado] = useState(false);
+  const [pagina, setPagina] = useState(1);
+  const [porPagina, setPorPagina] = useState(4);
+  const [inputPage, setInputPage] = useState(1);
+
+  // const maximo = listTareas.length / porPagina;
+  const maximo = Math.ceil(listTareas.length / porPagina);
+
+  // console.log(maximo);
 
   const handleChange = (e) => {
     setInputSearch(e.target.value);
@@ -63,7 +70,7 @@ const App = () => {
   const taskCompleted = (task) => {
     const s = listTareas.find((tarea) => tarea.id === task);
 
-    setEstado(s.estado = !s.estado);
+    setEstado((s.estado = !s.estado));
     // setEstado(false);
     setTimeout(() => {
       setEstado(false);
@@ -71,7 +78,36 @@ const App = () => {
     setListTareas([...listTareas]);
   };
 
+  const nextPage = () => {
+    setInputPage(inputPage + 1);
+    setPagina(pagina + 1);
+  };
 
+  const prevPage = () => {
+    setInputPage(parseInt(inputPage) - 1);
+    setPagina(parseInt(pagina) - 1);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.keyCode == 13) {
+      setPagina(parseInt(e.target.value));
+
+      if (
+        parseInt(e.target.value) < 1 || //si el numero es menor a 1 que no siga bajando
+        parseInt(e.target.value) > Math.ceil(maximo) ||
+        isNaN(parseInt(e.target.value))
+      ) {
+        setPagina(1);
+        setInputPage(1);
+      } else {
+        setPagina(parseInt(e.target.value));
+      }
+    }
+  };
+
+  const onChange = (e) => {
+    setInputPage(e.target.value);
+  };
 
   return (
     <AppDesign>
@@ -85,11 +121,23 @@ const App = () => {
         />
 
         <Main
+          porPagina={porPagina}
+          pagina={pagina}
           tareas={listTareas}
           removeTask={removeTask}
           taskCompleted={taskCompleted}
         />
-        {/* <Pagination /> */}
+        <Pagination
+        pagina={pagina}
+        onChange={onChange}
+          onKeyDown={onKeyDown}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          inputPage={inputPage}
+          porPagina={porPagina}
+          setPagina={setPagina}
+          maximo={maximo}
+        />
       </Container>
     </AppDesign>
   );

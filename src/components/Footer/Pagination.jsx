@@ -13,6 +13,15 @@ const PageNumber = styled.div`
   button {
     border: none;
     cursor: pointer;
+
+    :disabled {
+      stroke: #2f52df;
+    }
+  }
+
+  svg .btnPrev {
+    background-color: red;
+    stroke: #2f52df;
   }
 
   .pagination-num {
@@ -21,11 +30,24 @@ const PageNumber = styled.div`
   }
 `;
 
-const Pagination = () => {
+const Pagination = ({
+  porPagina,
+  maximo,
+  prevPage,
+  setPagina,
+  inputPage,
+  nextPage,
+  onKeyDown,
+  onChange,
+  pagina,
+}) => {
+  // console.log(porPagina, maximo);
+
   return (
     <PageNumber>
       <div className="">
-        <button>
+        {/* botones */}
+        <button disabled={pagina === 1 || pagina < 1} onClick={prevPage}>
           <svg
             width="13"
             height="16"
@@ -43,9 +65,24 @@ const Pagination = () => {
           </svg>
         </button>
       </div>
-      <div className="pagination-num">1 2 3</div>
+      <div className="pagination-num">
+        <input
+          onChange={(e) => onChange(e)}
+          onKeyDown={(e) => onKeyDown(e)}
+          name="inputPage"
+          autoComplete="off"
+          value={inputPage}
+          type="text"
+        />
+        <p>de {maximo} </p>
+      </div>
+      {/* botones */}
+
       <div className="">
-        <button>
+        <button
+          disabled={Math.ceil(pagina === maximo) || Math.ceil(pagina > maximo)}
+          onClick={nextPage}
+        >
           <svg
             width="12"
             height="16"

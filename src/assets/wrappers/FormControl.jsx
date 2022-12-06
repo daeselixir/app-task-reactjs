@@ -32,27 +32,6 @@ export const InputStyle = styled.input`
     color: #707070;
   }
 
-  /* &:active{
-    border-top:2px solid #EEF1F6 ;
-    border-left:2px solid #EEF1F6 ;
-    border-right:2px solid #EEF1F6 ;
-  }
-
-  &:hover{
-    border-top:2px solid #EEF1F6 ;
-    border-left:2px solid #EEF1F6 ;
-    border-right:2px solid #EEF1F6 ;
-  }
-
-  &::selection{
-
-    border-top:2px solid #EEF1F6 ;
-    border-left:2px solid #EEF1F6 ;
-    border-right:2px solid #EEF1F6 ;
-
-  } */
-
-
 
   &::placeholder {
     font-size: 14px;

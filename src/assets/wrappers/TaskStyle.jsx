@@ -5,15 +5,15 @@ export const TaskStyle = styled.div`
 
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
 
-  gap: 1rem;
-  padding: 0.5rem;
+  gap: 0.3rem;
+  padding: 0.4rem 0.6rem;
 
   .fecha {
-    width: 4rem;
     /* border: 1px solid red; */
+    width: 3rem;
 
     font-size: 14px;
     text-align: center;
@@ -36,16 +36,15 @@ export const TaskStyle = styled.div`
 
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    background: white;
+    background-color: white;
     border-left: 3px solid #5862f7;
     padding: 8px;
-    /* max-width: 100%; */
+    transition: all 0.2s;
     max-height: 4rem;
 
     display: flex;
     flex-direction: column;
     flex: 1;
-    /* gap: 1rem; */
 
     p {
       color: #414246;
@@ -60,11 +59,19 @@ export const TaskStyle = styled.div`
       color: #d3d3dd;
     }
   }
+  .activeTask i,
+  .activeTask p {
+    color: #fff;
+  }
+  .activeTask {
+    background-color: #65eb7b;
+    border-left: 3px solid #4baf5c;
+  }
 
   .button {
     /* border: 1px solid red; */
+
     height: 4rem;
-    /* max-width: 30%; */
 
     display: flex;
     gap: 0.5rem;
@@ -74,23 +81,31 @@ export const TaskStyle = styled.div`
       border-radius: 5px;
       background: white;
       max-height: 100%;
-      transition: all .5s;
+      transition: all 0.4s;
+      stroke: #bebaba;
     }
 
     .btn:hover {
       background: #5862f7;
+      stroke: #e7e4e4;
     }
 
-    .checkOk {
-      stroke: #d3d3dd;
+    /* tarea completed */
+
+    .checkOkListo {
+      stroke: #fdfdfd;
     }
 
-    .checkOk:hover {
-      stroke: #ffffff;
+    /* delete */
+
+    .checkDelete {
+      stroke: #ee2d2d;
     }
+
+    /* activo o desactive */
 
     .active {
-      background: #08ca29;
+      background: #70ee85;
     }
 
     .desactive {
