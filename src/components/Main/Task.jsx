@@ -1,6 +1,17 @@
+import { useEffect } from "react";
 import { TaskStyle } from "../../assets/wrappers/TaskStyle";
 
-const Task = ({ tareas, removeTask, taskCompleted, porPagina, pagina }) => {
+const Task = ({
+  tareas,
+  removeTask,
+  setPagina,
+  taskCompleted,
+  porPagina,
+  pagina,
+  maximo
+}) => {
+
+
   return (
     <>
       {tareas
@@ -44,7 +55,10 @@ const Task = ({ tareas, removeTask, taskCompleted, porPagina, pagina }) => {
                 </button>
 
                 {/* btn delete */}
-                <button className="btn" onClick={() => removeTask(tarea.id)}>
+                <button
+                  className="btn"
+                  onClick={(e) => removeTask(tarea.id,e)}
+                >
                   <svg
                     width="23"
                     height="24"

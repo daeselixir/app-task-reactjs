@@ -20,19 +20,20 @@ const newD = new Date().toLocaleDateString("es", {
 const mes = new Date().toLocaleDateString("es", { month: "short" });
 const day = new Date().toLocaleDateString("es", { day: "numeric" });
 
+//todo:
 // let estado = false;
 const App = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [listTareas, setListTareas] = useState([]);
   const [estado, setEstado] = useState(false);
   const [pagina, setPagina] = useState(1);
-  const [porPagina, setPorPagina] = useState(4);
+  const [porPagina, setPorPagina] = useState(1);
   const [inputPage, setInputPage] = useState(1);
 
   // const maximo = listTareas.length / porPagina;
   const maximo = Math.ceil(listTareas.length / porPagina);
 
-  // console.log(maximo);
+  // console.log("Maximo de pages", maximo);
 
   const handleChange = (e) => {
     setInputSearch(e.target.value);
@@ -50,6 +51,7 @@ const App = () => {
       {
         id: uuidv4(),
         input: inputSearch,
+
         mes: mes,
         day: day,
         fecha: capitalize(newD),
@@ -61,7 +63,8 @@ const App = () => {
   };
 
   const removeTask = (task) => {
-    // console.log(task);
+    // console.log(e.target);
+    console.log("Se removio una tarea");
     const filtred = listTareas.filter((tarea) => tarea.id !== task);
 
     setListTareas([...filtred]);
@@ -79,8 +82,8 @@ const App = () => {
   };
 
   const nextPage = () => {
-    setInputPage(inputPage + 1);
-    setPagina(pagina + 1);
+    setInputPage(parseInt(inputPage) + 1);
+    setPagina(parseInt(pagina) + 1);
   };
 
   const prevPage = () => {
@@ -119,17 +122,19 @@ const App = () => {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-
         <Main
           porPagina={porPagina}
           pagina={pagina}
           tareas={listTareas}
           removeTask={removeTask}
           taskCompleted={taskCompleted}
+          maximo={maximo}
+          setPagina={setPagina}
+          setListTareas={setListTareas}
         />
         <Pagination
-        pagina={pagina}
-        onChange={onChange}
+          pagina={pagina}
+          onChange={onChange}
           onKeyDown={onKeyDown}
           prevPage={prevPage}
           nextPage={nextPage}
