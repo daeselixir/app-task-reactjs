@@ -38,7 +38,7 @@ const Wrapper = ({
 
 
   return (
-    <>
+    <Main>
       {listTareas
         .slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina)
         .map((tarea) => {
@@ -105,7 +105,7 @@ const Wrapper = ({
             </TaskStyle>
           );
         })}
-    </>
+    </Main>
   );
 };
 
