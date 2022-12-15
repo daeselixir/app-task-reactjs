@@ -6,7 +6,7 @@ const Wrapper = ({ value, handleChange, handleSubmit }) => {
   return (
     <Header onSubmit={handleSubmit}>
       <div className="form-control inp">
-        <Input addInput={value} handleChange={handleChange} />
+        <Input inputAddTask={value} handleChange={handleChange} />
       </div>
       <div className="form-control btns">
         <Button type='submit' />

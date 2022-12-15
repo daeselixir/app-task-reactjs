@@ -23,26 +23,27 @@ const day = new Date().toLocaleDateString("es", { day: "numeric" });
 //todo:
 // let estado = false;
 const App = () => {
-  const [inputSearch, setInputSearch] = useState("");
+  const [inputAddTask, setInputAddTask] = useState("");
   const [listTareas, setListTareas] = useState([]);
-  const [estado, setEstado] = useState(false);
+  const [estadoTask, setEstadoTask] = useState(false);
   const [pagina, setPagina] = useState(1);
-  const [porPagina, setPorPagina] = useState(1);
+  const [porPagina, setPorPagina] = useState(2);
   const [inputPage, setInputPage] = useState(1);
 
-  // const maximo = listTareas.length / porPagina;
-  const maximo = Math.ceil(listTareas.length / porPagina);
-
-  // console.log("Maximo de pages", maximo);
+  var maximo = Math.ceil(listTareas.length / porPagina);
 
   const handleChange = (e) => {
-    setInputSearch(e.target.value);
+    setInputAddTask(e.target.value);
+  };
+
+  const onChange = (e) => {
+    setInputPage(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (inputSearch === "") {
+    if (inputAddTask === "") {
       return;
     }
 
@@ -50,45 +51,27 @@ const App = () => {
       ...listTareas,
       {
         id: uuidv4(),
-        input: inputSearch,
+        input: inputAddTask,
 
         mes: mes,
         day: day,
         fecha: capitalize(newD),
-        estado: estado,
+        estado: estadoTask,
       },
     ]);
 
-    setInputSearch("");
-  };
-
-  const removeTask = (task) => {
-    // console.log(e.target);
-    console.log("Se removio una tarea");
-    const filtred = listTareas.filter((tarea) => tarea.id !== task);
-
-    setListTareas([...filtred]);
+    setInputAddTask("");
   };
 
   const taskCompleted = (task) => {
     const s = listTareas.find((tarea) => tarea.id === task);
 
-    setEstado((s.estado = !s.estado));
-    // setEstado(false);
+    setEstado((s.estadoTask = !s.estadoTask));
+
     setTimeout(() => {
-      setEstado(false);
+      setEstadoTask(false);
     }, 3000);
     setListTareas([...listTareas]);
-  };
-
-  const nextPage = () => {
-    setInputPage(parseInt(inputPage) + 1);
-    setPagina(parseInt(pagina) + 1);
-  };
-
-  const prevPage = () => {
-    setInputPage(parseInt(inputPage) - 1);
-    setPagina(parseInt(pagina) - 1);
   };
 
   const onKeyDown = (e) => {
@@ -108,29 +91,37 @@ const App = () => {
     }
   };
 
-  const onChange = (e) => {
-    setInputPage(e.target.value);
+  const nextPage = () => {
+    setInputPage(parseInt(inputPage) + 1);
+    setPagina(parseInt(pagina) + 1);
+  };
+
+  const prevPage = () => {
+    setInputPage(parseInt(inputPage) - 1);
+    setPagina(parseInt(pagina) - 1);
   };
 
   return (
     <AppDesign>
       <h1 className="titleApp">List Task's - React JS</h1>
-      {/* <p>{estado ? "true" : "false"} </p> */}
+
       <Container>
         <Header
-          value={inputSearch}
+          value={inputAddTask}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
         <Main
-          porPagina={porPagina}
           pagina={pagina}
-          tareas={listTareas}
-          removeTask={removeTask}
+          porPagina={porPagina}
+          listTareas={listTareas}
           taskCompleted={taskCompleted}
-          maximo={maximo}
-          setPagina={setPagina}
           setListTareas={setListTareas}
+          maximo={maximo}
+          setInputPage={ setInputPage}
+          setPagina={setPagina}
+          inputPage={inputPage}
+        
         />
         <Pagination
           pagina={pagina}

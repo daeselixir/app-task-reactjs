@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { FormControl, InputStyle } from "../../assets/wrappers/FormControl";
 
-const Input = ({addInput,handleChange}) => {
+const Input = ({inputAddTask,handleChange}) => {
   
 
   return (
     <FormControl >
       <InputStyle
         type="text"
-        placeholder="Add Task..."
+        placeholder="Add Tasks..."
         onChange={handleChange}
-        value={addInput}
-        name="search"
+        value={inputAddTask}
+        name="addTask"
       />
     </FormControl>
   );
