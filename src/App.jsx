@@ -27,11 +27,12 @@ const App = () => {
   const [listTareas, setListTareas] = useState([]);
   const [estadoTask, setEstadoTask] = useState(false);
   const [pagina, setPagina] = useState(1);
+
   const [porPagina, setPorPagina] = useState(2);
   const [inputPage, setInputPage] = useState(1);
 
   var maximo = Math.ceil(listTareas.length / porPagina);
-
+// 4/2=2 3/2=1 
   const handleChange = (e) => {
     setInputAddTask(e.target.value);
   };
@@ -121,6 +122,7 @@ const App = () => {
           setInputPage={ setInputPage}
           setPagina={setPagina}
           inputPage={inputPage}
+          prevPage={prevPage}
         
         />
         <Pagination

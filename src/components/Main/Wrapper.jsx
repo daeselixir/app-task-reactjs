@@ -13,6 +13,7 @@ const Wrapper = ({
   setInputPage,
   setPagina,
   inputPage,
+  prevPage,
 }) => {
   // const volverAtras =()=> {
   //   if(maximo !== inputPage){
@@ -26,16 +27,15 @@ const Wrapper = ({
 
   // console.log(listTareas)
   const removeTask = (task) => {
+    console.log(listTareas.length);
     const filtred = listTareas.filter((tarea) => tarea.id !== task);
     setListTareas(filtred);
-    // console.log(maximo);
-    // if (pagina !== inputPage) {
-    //   setInputPage(parseInt(inputPage) - 1);
-    //   setPagina(parseInt(pagina) - 1);
-    // }
+    if (listTareas.length / pagina <= 1) {
+      prevPage();
+    }
+    console.log(listTareas.length);
 
   };
-
 
   return (
     <Main>
