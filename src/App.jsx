@@ -31,8 +31,8 @@ const App = () => {
   const [porPagina, setPorPagina] = useState(2);
   const [inputPage, setInputPage] = useState(1);
 
-  var maximo = Math.ceil(listTareas.length / porPagina);
-// 4/2=2 3/2=1 
+  var maximo = Math.ceil(listTareas.length / porPagina); // 3 / 2 = 1
+
   const handleChange = (e) => {
     setInputAddTask(e.target.value);
   };
@@ -53,11 +53,10 @@ const App = () => {
       {
         id: uuidv4(),
         input: inputAddTask,
-
         mes: mes,
         day: day,
         fecha: capitalize(newD),
-        estado: estadoTask,
+        estadoTask: estadoTask,
       },
     ]);
 
@@ -67,7 +66,7 @@ const App = () => {
   const taskCompleted = (task) => {
     const s = listTareas.find((tarea) => tarea.id === task);
 
-    setEstado((s.estadoTask = !s.estadoTask));
+    setEstadoTask((s.estadoTask = !s.estadoTask));
 
     setTimeout(() => {
       setEstadoTask(false);

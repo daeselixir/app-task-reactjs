@@ -7,34 +7,35 @@ const Wrapper = ({
   listTareas,
   porPagina,
   taskCompleted,
-  maximo,
   setListTareas,
   pagina,
-  setInputPage,
-  setPagina,
   inputPage,
   prevPage,
 }) => {
-  // const volverAtras =()=> {
-  //   if(maximo !== inputPage){
-  //     console.log('maximo es distinto de input page');
-  //     setInputPage(parseInt(inputPage) - 1);
-  //   setPagina(parseInt(pagina) - 1);
+  // const removeTask = (task) => {
+  //   console.log(listTareas.length);
+  //   const filtred = listTareas.filter((tarea) => tarea.id !== task);
+  //   setListTareas(filtred);
+  //   console.log(maximo);
+  //   if ((filtred.length) % 3 == 0) {
+  //     prevPage();
   //   }
-  // }
+  // };
 
-  // console.log(maximo);
-
-  // console.log(listTareas)
   const removeTask = (task) => {
-    console.log(listTareas.length);
     const filtred = listTareas.filter((tarea) => tarea.id !== task);
-    setListTareas(filtred);
-    if (listTareas.length / pagina <= 1) {
-      prevPage();
-    }
-    console.log(listTareas.length);
+    setListTareas([...filtred]);
+    console.log("numero de pagina", pagina);
+    const test = (pagina - 1) * porPagina
+    const test2= (pagina - 1) * porPagina + porPagina
+    console.log('test',test,test2)
+    const renderedTask = filtred.slice(
+      (pagina - 1) * porPagina,// 2 - 1 * 2 = 2
+      (pagina - 1) * porPagina + porPagina // 2 - 1 * 2 + 2 = 4
+    ).length;
+    console.log("longitud de task", renderedTask);
 
+    if (!renderedTask && inputPage !== 1) prevPage();
   };
 
   return (
@@ -50,7 +51,7 @@ const Wrapper = ({
                 <span>{tarea.day} </span>
               </div>
               {/*2 tareas */}
-              <div className={tarea.estado ? "tarea activeTask" : "tarea"}>
+              <div className={tarea.estadoTask ? "tarea activeTask" : "tarea"}>
                 <p>{tarea.input} </p>
                 <i>{tarea.fecha} </i>
               </div>
@@ -61,7 +62,9 @@ const Wrapper = ({
                 <button
                   type="submit"
                   onClick={() => taskCompleted(tarea.id)}
-                  className={tarea.estado ? "btn active checkOkListo" : "btn"}
+                  className={
+                    tarea.estadoTask ? "btn active checkOkListo" : "btn"
+                  }
                   onSubmit={() => removeTask(tarea.id)}
                 >
                   <svg
